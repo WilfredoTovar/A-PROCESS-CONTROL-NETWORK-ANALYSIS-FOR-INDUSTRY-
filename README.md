@@ -17,3 +17,5 @@ Developing Architecture solutions for an industrial network to improve reliabili
 We are developing a theoretical framework for new switch configurations to allow for access to the device layer for a monitoring system for breakdown maintenance purposes. 
 
 The Development of an Industrial network simulator that is capable of producing an industrial network model.
+
+##########################################################################
