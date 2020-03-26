@@ -10,12 +10,8 @@ Transmission Control Protocol (TCP) emerged with the introduction of Ethernet to
 
 Project Scope:
 
-The scope of this project consists of three parts:
+The scope of this project consists of two parts:
+A. The development of an Architecture solution for a real time complex industrial network to improve reliability through redundancy and the addition of monitoring and configuration tools to reduce downtime associated with communication issues reported by delay accounting software.
 
-Developing Architecture solutions for an industrial network to improve reliability through redundancy and the addition of monitoring and configuration tools to reduce downtime associated with communication issues reported by delay accounting software. ​
+B. The development of automation script that is capable of doing certain task to improve the maintenance involved in the larger networks. It helps to configure, provision and analyse the network in an efficient way by running the script.
 
-We are developing a theoretical framework for new switch configurations to allow for access to the device layer for a monitoring system for breakdown maintenance purposes. 
-
-The Development of an Industrial network simulator that is capable of producing an industrial network model.
-
-#######################################################################################################
