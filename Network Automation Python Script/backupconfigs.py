@@ -1,3 +1,9 @@
+"""
+ Author:Lukeman Hakkim Sheik Alavudeen
+ This file contains the code to backup config from cisco switches and output on the console.
+ Note: Here Ip address have been mocked.
+"""
+
 import getpass
 import telnetlib
 
@@ -8,7 +14,7 @@ f = open('myswitches')
 
 for IP in f:
     IP=IP.strip()
-    print ('Get running config from Switch ' + (IP))
+    print ('Back up running config from Switch ' + (IP))
     HOST = IP
     tn = telnetlib.Telnet(HOST)
     tn.read_until(b'Username: ')
