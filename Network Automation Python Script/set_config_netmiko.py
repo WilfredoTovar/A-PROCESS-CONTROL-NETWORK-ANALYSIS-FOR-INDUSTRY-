@@ -1,36 +1,43 @@
+"""
+ Author:Lukeman Hakkim Sheik Alavudeen
+ This file contains the code to set the config in cisco routers.
+ Note: Here IP of the routers have been mocked with <IP>
+"""
+
 from netmiko import ConnectHandler
+
 
 iosv_l2_s2 = {
     'device_type': 'cisco_ios',
-    'ip': '192.168.122.82',
+    'ip': '<IP>',
     'username': 'david',
     'password': 'cisco',
 }
 
 iosv_l2_s3 = {
     'device_type': 'cisco_ios',
-    'ip': '192.168.122.83',
+    'ip': '<IP>',
     'username': 'david',
     'password': 'cisco',
 }
 
 iosv_l2_s4 = {
     'device_type': 'cisco_ios',
-    'ip': '192.168.122.84',
+    'ip': '<IP>',
     'username': 'david',
     'password': 'cisco',
 }
 
 iosv_l2_s5 = {
     'device_type': 'cisco_ios',
-    'ip': '192.168.122.85',
+    'ip': '<IP>',
     'username': 'david',
     'password': 'cisco',
 }
 
 iosv_l2_s6 = {
     'device_type': 'cisco_ios',
-    'ip': '192.168.122.86',
+    'ip': '<IP>',
     'username': 'david',
     'password': 'cisco',
 }
