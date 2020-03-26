@@ -1,13 +1,20 @@
+"""
+ Author:Lukeman Hakkim Sheik Alavudeen
+ This file contains the code to get the config from cisco routers.
+"""
+
 from simplecrypt import encrypt, decrypt
 from pprint import pprint
 from netmiko import ConnectHandler
 import json
 from time import time
-
 import threading
 
-#------------------------------------------------------------------------------
+
 def read_devices( devices_filename ):
+    """
+    To read the device information from a file
+    """
 
     devices = {}  # create our dictionary for storing devices and their info
 
@@ -23,15 +30,17 @@ def read_devices( devices_filename ):
 
             devices[device['ipaddr']] = device  # store our device in the devices dictionary
                                            
-
-    print ('\n----- devices --------------------------')
+    print ('\n----- devices -------')
     pprint( devices )
 
     return devices
 
-#------------------------------------------------------------------------------
-def read_device_creds( device_creds_filename, key ):
 
+def read_device_creds( device_creds_filename, key ):
+    """
+    To read the device credentials from the encrypted file
+    """
+    
     print ('\n... getting credentials ...\n')
     with open( device_creds_filename, 'rb') as device_creds_file:
         device_creds_json = decrypt( key, device_creds_file.read() )
@@ -46,10 +55,14 @@ def read_device_creds( device_creds_filename, key ):
 
     return device_creds
 
-#------------------------------------------------------------------------------
+
 def config_worker( device, creds ):
 
-    #---- Connect to the device ----
+     """
+     To get the configuration from cisco io devices
+     """
+        
+    #Connect to the device
     if device['type'] == 'cisco-ios': device_type = 'cisco_ios'
     elif device['type'] == 'cisco-xr':  device_type = 'cisco_xr'
     else:                               device_type = 'cisco_ios'    # attempt Cisco IOS as default
@@ -57,37 +70,32 @@ def config_worker( device, creds ):
     print ('---- Connecting to device {0}, username={1}, password={2}'.format( device['ipaddr'],
                                                                                 creds[1], creds[2] ))
 
-    #---- Connect to the device
+    #Connect to the device
     session = ConnectHandler( device_type=device_type, ip=device['ipaddr'],
                                                        username=creds[1], password=creds[2] )
-    #session = ConnectHandler( device_type=device_type, ip='172.16.0.1',  # Faking out IP address for now
-    #                                                   username=creds[1], password=creds[2] )
  
 
     if device_type == 'cisco_ios':
-        #---- Use CLI command to get configuration data from device
-        print ('---- Getting configuration from device')
+        #Use CLI command to get configuration data from device
+        print ('Getting configuration from device')
         config_data = session.send_command('show run')
    
 
     if device_type == 'cisco_xr':
-        #---- Use CLI command to get configuration data from device
-        print ('---- Getting configuration from device')
+        #Use CLI command to get configuration data from device
+        print ('Getting configuration from device')
         config_data = session.send_command('show configuration running-config')
 
-    #---- Write out configuration information to file
-    config_filename = 'config-' + device['ipaddr']  # Important - create unique configuration file name
+    #Write out configuration information to file
+    config_filename = 'config-' + device['ipaddr'] e
 
-    print ('---- Writing configuration: ', config_filename)
+    print ('Writing configuration: ', config_filename)
     with open( config_filename, 'w' ) as config_out:  config_out.write( config_data )
-
     session.disconnect()
-
     return
 
-
 #==============================================================================
-# ---- Main: Get Configuration
+#  Main: Get Configuration
 #==============================================================================
 
 devices = read_devices( 'devices-file' )
@@ -101,11 +109,11 @@ for ipaddr,device in devices.items():
     print ('Creating thread for: ', device)
     config_threads_list.append( threading.Thread( target=config_worker, args=(device, creds[ipaddr] ) ) )
 
-print ('\n---- Begin get config threading ----\n')
+print ('\nBegin get config threading\n')
 for config_thread in config_threads_list:
     config_thread.start()
 
 for config_thread in config_threads_list:
     config_thread.join()
 
-print ('\n---- End get config threading, elapsed time=', time() - starting_time)
+print ('\nEnd get config threading, elapsed time=', time() - starting_time)
