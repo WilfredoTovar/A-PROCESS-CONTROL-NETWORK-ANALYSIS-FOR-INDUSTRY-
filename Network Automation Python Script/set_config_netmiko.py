@@ -1,7 +1,7 @@
 """
  Author:Lukeman Hakkim Sheik Alavudeen
  This file contains the code to set the config in cisco routers.
- Note: Here IP of the routers have been mocked with <IP>
+ Note: Here IP address of the routers have been mocked.
 """
 
 from netmiko import ConnectHandler
