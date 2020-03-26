@@ -1,6 +1,7 @@
 """
  Author:Lukeman Hakkim Sheik Alavudeen
  This file contains the code to get the config from cisco routers.
+ Note: Here Ip address have been mocked.
 """
 
 from simplecrypt import encrypt, decrypt
